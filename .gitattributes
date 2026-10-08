@@ -1,0 +1,14 @@
+# 强制 LF 行尾 —— 内核源码必须保持 LF
+#
+# 原因（本地实测）：Windows 上 core.autocrlf=true 会把 checkout 出来的
+# include/linux/sched.h 转成 CRLF（实测 2244 行为 CRLF、0 行为 LF），
+# 导致补丁匹配失败（补丁是 LF）。
+# Linux CI 默认不会转换，但显式声明可避免任何环境差异。
+* text=auto eol=lf
+
+# 二进制文件不做转换
+*.png binary
+*.jpg binary
+*.gz binary
+*.img binary
+*.bin binary
